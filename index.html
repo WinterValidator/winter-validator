@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Winter Validator — Mina Protocol Staking &amp; Multichain Infrastructure</title>
+<meta name="description" content="Winter Validator — independent Mina Protocol block producer expanding to Celestia & Monad. Cold-headed operations, hot on uptime.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>❄️</text></svg>">
+<style>
+:root{--bg:#070d1a;--card:#0d1626;--card2:#111d33;--ink:#e8f0fb;--dim:#8fa6c4;--ice:#6db9ff;--ice2:#a8d8ff;--line:#1c2c47;--good:#4ade80;--warn:#fbbf24}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{font-family:ui-sans-serif,system-ui,-apple-system,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;background:var(--bg);color:var(--ink);line-height:1.6}
+.wrap{max-width:1000px;margin:0 auto;padding:0 24px}
+a{color:var(--ice);text-decoration:none}
+a:hover{text-decoration:underline}
+header{padding:56px 0 0;background:linear-gradient(180deg,#0a1526 0%,var(--bg) 100%);border-bottom:1px solid var(--line);text-align:center;overflow:hidden}
+h1{font-size:clamp(2.2rem,6vw,3.4rem);letter-spacing:-.02em;margin:12px 0 8px}
+.sub{color:var(--dim);font-size:1.15rem;max-width:640px;margin:0 auto}
+.tagline{color:var(--ice2);font-weight:600;letter-spacing:.12em;text-transform:uppercase;font-size:.8rem}
+.kicker{color:var(--ice1);font-weight:700;letter-spacing:.22em;text-transform:uppercase;font-size:.72rem;margin:10px 0 0}
+.heroart{display:block;width:min(880px,96%);margin:26px auto -6px}
+section{padding:56px 0;border-bottom:1px solid var(--line)}
+h2{font-size:1.6rem;margin-bottom:24px;letter-spacing:-.01em}
+h2 .n{color:var(--ice);font-family:ui-monospace,monospace;font-size:1rem;margin-right:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.card h3{font-size:1.02rem;margin-bottom:6px}
+.card p{color:var(--dim);font-size:.95rem}
+.big{font-size:1.9rem;font-weight:700;color:var(--ice2)}
+.keybox{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:18px;display:flex;gap:12px;align-items:center;flex-wrap:wrap}
+.keybox code{font-family:ui-monospace,Menlo,monospace;font-size:.85rem;color:var(--ice2);word-break:break-all;flex:1}
+button{background:var(--ice);border:none;border-radius:8px;padding:9px 16px;font-weight:600;color:#04121f;cursor:pointer;font-size:.9rem}
+button:hover{background:var(--ice2)}
+.steps{counter-reset:s;list-style:none}
+.steps li{counter-increment:s;position:relative;padding:0 0 18px 46px}
+.steps li:before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--card2);border:1px solid var(--line);color:var(--ice);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
+.steps li b{display:block;margin-bottom:2px}
+.steps li span{color:var(--dim);font-size:.95rem}
+ul.plain{list-style:none}
+ul.plain li{padding:8px 0;border-bottom:1px dashed var(--line);color:var(--dim)}
+ul.plain li:last-child{border:none}
+ul.plain b{color:var(--ink)}
+.ok{color:var(--good)}
+.pill{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;border-radius:999px;padding:3px 10px;margin-bottom:10px}
+.pill.live{background:rgba(74,222,128,.12);color:var(--good);border:1px solid rgba(74,222,128,.35)}
+.pill.new{background:rgba(251,191,36,.1);color:var(--warn);border:1px solid rgba(251,191,36,.35)}
+.pill.soon{background:rgba(109,185,255,.1);color:var(--ice);border:1px solid rgba(109,185,255,.35)}
+.netgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.net{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;position:relative;overflow:hidden}
+.net h3{font-size:1.1rem;margin-bottom:4px}
+.net .role{color:var(--ice2);font-weight:600;font-size:.9rem;margin-bottom:10px}
+.net p{color:var(--dim);font-size:.92rem}
+.net .glyph{position:absolute;right:-12px;top:-14px;font-size:5rem;opacity:.08;user-select:none}
+.diagram{display:block;width:100%;margin-top:8px}
+footer{padding:36px 0;color:var(--dim);font-size:.85rem;text-align:center}
+footer a{margin:0 8px}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="tagline">❄ Winter Validator</div>
+    <p class="kicker">❄ Winter never sleeps.</p>
+<h1>Cold-headed operations.<br>Hot on uptime.</h1>
+    <p class="sub">Independent <b>Mina Protocol</b> block producer since 2021 — now expanding across ecosystems. Redundant nodes, 24/7 monitoring, zero slashing.</p>
+  </div>
+  <svg class="heroart" viewBox="0 0 880 330" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Winter Validator network over snowy mountains">
+    <defs>
+      <linearGradient id="aur1" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6db9ff" stop-opacity=".55"/><stop offset="1" stop-color="#6db9ff" stop-opacity="0"/></linearGradient>
+      <linearGradient id="aur2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7ef0d4" stop-opacity=".4"/><stop offset="1" stop-color="#7ef0d4" stop-opacity="0"/></linearGradient>
+      <linearGradient id="mtn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#152441"/><stop offset="1" stop-color="#0a1526"/></linearGradient>
+      <linearGradient id="snow" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#dcecff"/><stop offset="1" stop-color="#9cc4ec"/></linearGradient>
+      <radialGradient id="glow" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#a8d8ff" stop-opacity=".9"/><stop offset="1" stop-color="#a8d8ff" stop-opacity="0"/></radialGradient>
+    </defs>
+    <!-- aurora -->
+    <path d="M40 60 C220 10 340 95 520 55 C660 25 780 70 860 40 L860 0 L40 0 Z" fill="url(#aur1)"/>
+    <path d="M120 95 C300 45 480 130 640 85 C740 60 820 95 870 75 L870 30 L120 30 Z" fill="url(#aur2)" opacity=".7"/>
+    <!-- stars -->
+    <g fill="#e8f0fb"><circle cx="90" cy="40" r="1.4"/><circle cx="200" cy="26" r="1"/><circle cx="330" cy="44" r="1.2"/><circle cx="560" cy="24" r="1"/><circle cx="700" cy="46" r="1.3"/><circle cx="810" cy="22" r="1"/><circle cx="470" cy="70" r=".9"/></g>
+    <!-- hex chain network floating -->
+    <g transform="translate(0,10)">
+      <g stroke="#6db9ff" stroke-opacity=".6" stroke-width="1.5">
+        <line x1="300" y1="150" x2="385" y2="105"/><line x1="385" y1="105" x2="470" y2="150"/><line x1="470" y1="150" x2="555" y2="105"/><line x1="555" y1="105" x2="640" y2="150"/>
+        <line x1="300" y1="150" x2="385" y2="195"/><line x1="385" y1="195" x2="470" y2="150"/><line x1="470" y1="150" x2="555" y2="195"/><line x1="555" y1="195" x2="640" y2="150"/>
+        <line x1="385" y1="105" x2="385" y2="195"/><line x1="555" y1="105" x2="555" y2="195"/>
+        <line x1="300" y1="150" x2="230" y2="120"/><line x1="640" y1="150" x2="710" y2="120"/>
+      </g>
+      <g>
+        <g transform="translate(385,105)"><circle r="26" fill="url(#glow)"/><polygon points="0,-16 14,-8 14,8 0,16 -14,8 -14,-8" fill="none" stroke="#a8d8ff" stroke-width="2"/><polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5" fill="#a8d8ff"/></g>
+        <g transform="translate(555,105)"><circle r="26" fill="url(#glow)"/><polygon points="0,-16 14,-8 14,8 0,16 -14,8 -14,-8" fill="none" stroke="#a8d8ff" stroke-width="2"/><polygon points="0,-7 6,-3.5 6,3.5 0,7 -6,3.5 -6,-3.5" fill="#a8d8ff"/></g>
+        <g transform="translate(300,150)"><polygon points="0,-13 11,-6.5 11,6.5 0,13 -11,6.5 -11,-6.5" fill="#111d33" stroke="#6db9ff" stroke-width="1.6"/></g>
+        <g transform="translate(470,150)"><circle r="17" fill="url(#glow)"/><polygon points="0,-13 11,-6.5 11,6.5 0,13 -11,6.5 -11,-6.5" fill="#111d33" stroke="#6db9ff" stroke-width="1.8"/><polygon points="0,-6 5,-3 5,3 0,6 -5,3 -5,-3" fill="#a8d8ff"/></g>
+        <g transform="translate(640,150)"><polygon points="0,-13 11,-6.5 11,6.5 0,13 -11,6.5 -11,-6.5" fill="#111d33" stroke="#6db9ff" stroke-width="1.6"/></g>
+        <g transform="translate(385,195)"><polygon points="0,-11 9.5,-5.5 9.5,5.5 0,11 -9.5,5.5 -9.5,-5.5" fill="#0d1626" stroke="#4d7db3" stroke-width="1.4"/></g>
+        <g transform="translate(555,195)"><polygon points="0,-11 9.5,-5.5 9.5,5.5 0,11 -9.5,5.5 -9.5,-5.5" fill="#0d1626" stroke="#4d7db3" stroke-width="1.4"/></g>
+        <g transform="translate(230,120)"><polygon points="0,-9 7.8,-4.5 7.8,4.5 0,9 -7.8,4.5 -7.8,-4.5" fill="#0d1626" stroke="#4d7db3" stroke-width="1.2"/></g>
+        <g transform="translate(710,120)"><polygon points="0,-9 7.8,-4.5 7.8,4.5 0,9 -7.8,4.5 -7.8,-4.5" fill="#0d1626" stroke="#4d7db3" stroke-width="1.2"/></g>
+      </g>
+    </g>
+    <!-- snow particles -->
+    <g fill="#e8f0fb" opacity=".85"><circle cx="150" cy="200" r="2"/><circle cx="250" cy="240" r="1.6"/><circle cx="420" cy="230" r="1.8"/><circle cx="610" cy="255" r="1.5"/><circle cx="760" cy="215" r="2"/><circle cx="520" cy="270" r="1.3"/><circle cx="330" cy="275" r="1.5"/></g>
+    <!-- mountains -->
+    <path d="M0 330 L0 240 L120 150 L235 250 L330 175 L470 300 Z" fill="url(#mtn)"/>
+    <path d="M470 300 L560 200 L660 275 L760 185 L880 265 L880 330 Z" fill="url(#mtn)"/>
+    <path d="M120 150 L150 185 L120 196 L92 184 Z" fill="url(#snow)"/>
+    <path d="M330 175 L356 205 L330 215 L305 205 Z" fill="url(#snow)"/>
+    <path d="M760 185 L788 220 L760 231 L734 220 Z" fill="url(#snow)"/>
+    <path d="M560 200 L582 226 L560 235 L539 226 Z" fill="url(#snow)"/>
+    <!-- foreground snow ground -->
+    <path d="M0 330 L0 300 Q140 280 260 300 Q400 322 540 302 Q700 282 880 305 L880 330 Z" fill="#0c1830"/>
+  </svg>
+</header>
+
+<section id="stats">
+  <div class="wrap">
+    <div class="grid">
+      <div class="card"><div class="big">2021</div><h3>Running since</h3><p>Securing Mina mainnet through years of upgrades, hard forks and winters.</p></div>
+      <div class="card"><div class="big">4</div><h3>Redundant BP nodes</h3><p>Independent hosts &amp; networks, one key — a downed node never stops production.</p></div>
+      <div class="card"><div class="big">24/7</div><h3>Monitoring &amp; alerting</h3><p>Prometheus + Grafana, automated alerts. We know before you do.</p></div>
+      <div class="card"><div class="big">0</div><h3>Slashing incidents</h3><p>Clean record. Security-first key management, careful upgrade discipline.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="staking">
+  <div class="wrap">
+    <h2><span class="n">01</span>Stake with Winter on Mina</h2>
+    <p style="color:var(--dim);margin-bottom:16px">Delegate your MINA to our block producer key:</p>
+    <div class="keybox">
+      <code id="bpkey">B62qn3aPKv9vuoU1oJdT785bYLbbU1TTrNAXyEfycA17Kx7Miao4whM</code>
+      <button onclick="copyKey()" id="cbtn">Copy</button>
+    </div>
+    <ol class="steps" style="margin-top:28px">
+      <li><b>Install a Mina wallet</b><span>Auro Wallet or Cloria — both support staking delegation.</span></li>
+      <li><b>Open the staking section</b><span>Choose "Change delegation" / "Stake delegation".</span></li>
+      <li><b>Paste our key above</b><span>Confirm the transaction. No funds leave your wallet — delegation is non-custodial.</span></li>
+      <li><b>Wait 2 epochs</b><span>Your stake becomes active after the next epoch boundary; rewards follow from the epoch after.</span></li>
+    </ol>
+    <p style="color:var(--dim);font-size:.9rem;margin-top:8px">Mina is the lightweight blockchain — the whole chain verifies in one screenshot-sized proof (~22 kB). Delegation is fully non-custodial: you keep control of your funds at all times.</p>
+  </div>
+</section>
+
+<section id="networks">
+  <div class="wrap">
+    <h2><span class="n">02</span>Where we operate</h2>
+    <p style="color:var(--dim);margin-bottom:20px">One operator, one standard: redundant hardware, aggressive monitoring, honest status. Mina is home — the winter is expanding.</p>
+    <div class="netgrid">
+      <div class="net"><span class="glyph">❄</span><span class="pill live">● Live</span><h3>Mina — Mainnet</h3><div class="role">Block Producer</div><p>4 redundant block producer nodes across separate hosts and networks, plus a devnet test node for rehearsing every upgrade before mainnet.</p></div>
+      <div class="net"><span class="glyph">🧊</span><span class="pill live">● Live</span><h3>Celestia — Mocha testnet</h3><div class="role">Validator — Signing blocks</div><p>Live validator on mocha-5 since Sep 2026: consensus node signing blocks, bridge node serving data availability. Foundation delegation cohort target.</p></div>
+      <div class="net"><span class="glyph">💠</span><span class="pill soon">◐ Testnet</span><h3>Monad — Testnet</h3><div class="role">Full node</div><p>Early presence on Monad testnet — preparing infrastructure and name ahead of mainnet. We go where parallel execution meets serious engineering.</p></div>
+      <div class="net"><span class="glyph">⛰</span><span class="pill live">● Live</span><h3>Celestia — Mainnet</h3><div class="role">Validator — Bonded</div><p>Mainnet validator bonded since Sep 2026. "Winter never sleeps. Cold-headed operations. Hot on uptime." — modular data availability is where we operate.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="infra">
+  <div class="wrap">
+    <h2><span class="n">03</span>Infrastructure</h2>
+    <ul class="plain">
+      <li><b>4 block producer nodes</b> — distributed across separate hosts &amp; networks, identical state, synchronized</li>
+      <li><b>No SNARK workers on BP nodes</b> — block production never competes for CPU with SNARK proving</li>
+      <li><b>Prometheus + Grafana stack</b> — metrics from every host, alerting wired straight to our ops channel</li>
+      <li><b>Devnet rehearsal</b> — every upgrade is tested on devnet before touching mainnet</li>
+      <li><b>EU + APAC footprint</b> — nodes in Europe and Asia for geographic spread</li>
+      <li><b class="ok">Status: all systems operational</b></li>
+    </ul>
+    <svg class="diagram" viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Winter Validator infrastructure map">
+      <defs>
+        <linearGradient id="dline" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#6db9ff" stop-opacity=".15"/><stop offset=".5" stop-color="#6db9ff" stop-opacity=".7"/><stop offset="1" stop-color="#6db9ff" stop-opacity=".15"/></linearGradient>
+      </defs>
+      <style>
+        .t{font-family:ui-monospace,Menlo,monospace}
+        .lbl{font:600 15px ui-sans-serif,system-ui;fill:#e8f0fb}
+        .sub2{font:12px ui-sans-serif,system-ui;fill:#8fa6c4}
+        .st{font:700 10px ui-sans-serif,system-ui}
+      </style>
+      <!-- monitoring center -->
+      <g>
+        <rect x="360" y="20" width="180" height="58" rx="12" fill="#111d33" stroke="#6db9ff" stroke-width="1.5"/>
+        <text x="450" y="44" text-anchor="middle" class="lbl" font-size="14">🖥 Monitoring · 24/7</text>
+        <text x="450" y="62" text-anchor="middle" class="sub2">Prometheus + Grafana + alerts</text>
+      </g>
+      <!-- links -->
+      <g stroke="url(#dline)" stroke-width="1.6" stroke-dasharray="5 5">
+        <path d="M450 78 C450 130 170 120 140 175" fill="none"/>
+        <path d="M450 78 C450 130 310 120 300 175" fill="none"/>
+        <path d="M450 78 C450 130 455 120 455 175" fill="none"/>
+        <path d="M450 78 C450 130 605 120 615 175" fill="none"/>
+        <path d="M450 78 C450 130 770 120 785 175" fill="none"/>
+      </g>
+      <!-- mina row -->
+      <text x="140" y="150" text-anchor="middle" class="sub2" letter-spacing="2">MINA MAINNET — BLOCK PRODUCERS ×4</text>
+      <g>
+        <rect x="75" y="175" width="130" height="52" rx="10" fill="#0d1626" stroke="#1c2c47"/>
+        <text x="140" y="196" text-anchor="middle" class="lbl" font-size="12">❄ Node 1</text><text id="st-node1" x="140" y="214" text-anchor="middle" class="st" fill="#4ade80">SYNCED</text>
+        <rect x="235" y="175" width="130" height="52" rx="10" fill="#0d1626" stroke="#1c2c47"/>
+        <text x="300" y="196" text-anchor="middle" class="lbl" font-size="12">❄ Node 2</text><text id="st-node2" x="300" y="214" text-anchor="middle" class="st" fill="#4ade80">SYNCED</text>
+        <rect x="395" y="175" width="130" height="52" rx="10" fill="#0d1626" stroke="#1c2c47"/>
+        <text x="460" y="196" text-anchor="middle" class="lbl" font-size="12">❄ Node 3</text><text id="st-node3" x="460" y="214" text-anchor="middle" class="st" fill="#4ade80">SYNCED</text>
+        <rect x="555" y="175" width="130" height="52" rx="10" fill="#0d1626" stroke="#1c2c47"/>
+        <text x="620" y="196" text-anchor="middle" class="lbl" font-size="12">❄ Node 4</text><text id="st-node4" x="620" y="214" text-anchor="middle" class="st" fill="#4ade80">SYNCED</text>
+      </g>
+      <!-- right column: other nets -->
+      <text x="785" y="150" text-anchor="middle" class="sub2" letter-spacing="2">EXPANSION</text>
+      <g>
+        <rect x="715" y="175" width="140" height="52" rx="10" fill="#0d1626" stroke="#fbbf24" stroke-opacity=".5"/>
+        <text x="785" y="196" text-anchor="middle" class="lbl" font-size="12">🧊 Celestia</text><text id="st-celestia" x="785" y="214" text-anchor="middle" class="st" fill="#4ade80">SYNCED</text>
+      </g>
+      <g stroke="#1c2c47" stroke-width="1.4">
+        <path d="M715 201 C680 201 690 235 655 235" fill="none"/>
+        <path d="M715 235 L770 235" fill="none" stroke="none"/>
+      </g>
+      <g>
+        <rect x="555" y="235" width="300" height="52" rx="10" fill="#0d1626" stroke="#1c2c47"/>
+        <text x="590" y="256" class="lbl" font-size="13">💠 Monad testnet</text><text id="st-monad" x="590" y="274" class="st" fill="#fbbf24">SYNCING</text>
+        <rect x="385" y="235" width="160" height="52" rx="10" fill="none" stroke="#1c2c47" stroke-dasharray="6 5"/>
+        <text x="465" y="256" text-anchor="middle" class="lbl" font-size="12">⛰ Celestia Main</text><text x="465" y="274" text-anchor="middle" class="st" fill="#4ade80">LIVE</text>
+        <rect x="75" y="235" width="300" height="52" rx="10" fill="#0d1626" stroke="#1c2c47"/>
+        <text x="110" y="256" class="lbl" font-size="13">🧪 Mina Testnet</text><text id="st-minatestnet" x="110" y="274" class="st" fill="#4ade80">SYNCED</text>
+      </g>
+      <!-- ground line -->
+      <line x1="40" y1="292" x2="860" y2="292" stroke="#1c2c47"/>
+    </svg>
+    <p style="color:var(--dim);font-size:.82rem;margin-top:10px">Celestia testnet status updates live from chain RPC every 2 minutes; other statuses updated by our ops team (monitoring alerts fire within minutes of any change).</p>
+  </div>
+</section>
+
+<section id="about">
+  <div class="wrap">
+    <h2><span class="n">04</span>About Winter</h2>
+    <p style="color:var(--dim)">Winter Validator is a small independent operator that started securing Mina in 2021 and never stopped. We're sysadmins and builders first: we own the hardware, write the alerting, and carry the pager ourselves. No staking-as-a-service middlemen, no rented reputation — just people who genuinely enjoy keeping nodes alive.</p>
+    <p style="color:var(--dim);margin-top:12px">Our name is our operating philosophy: <b style="color:var(--ink)">cold when debugging, hot when systems break.</b> Calm, methodical incident response — and fast, honest communication when something needs your attention.</p>
+    <div class="grid" style="margin-top:20px">
+      <div class="card"><h3>🧊 Cold-headed</h3><p>Methodical operations, rehearsed upgrades, no gambling with your stake.</p></div>
+      <div class="card"><h3>🔥 Hot on response</h3><p>Alerts fire within minutes. Incidents get post-mortems, not excuses.</p></div>
+      <div class="card"><h3>🗣 Honest comms</h3><p>When something breaks, you hear it from us first — plainly.</p></div>
+      <div class="card"><h3>🌱 Growing</h3><p>Mina today, Celestia &amp; Monad next. Same standard on every chain.</p></div>
+    </div>
+    <div class="grid" style="margin-top:16px">
+      <div class="card"><h3>💬 Discord</h3><p>winter_validator</p></div>
+      <div class="card"><h3>❄ Commission</h3><p>Celestia 20% (chain minimum) · Mina 5% — no other costs, ever</p></div>
+      <div class="card"><h3>🛡 Uptime</h3><p>Live status page coming soon</p></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <p>❄ <b>Winter Validator</b> — Mina Protocol staking · <a href="mailto:hello@validators.win">hello@validators.win</a></p>
+    <p style="margin-top:8px">Non-custodial delegation · Delegating is your own decision — this site is informational, not financial advice.</p>
+  </div>
+</footer>
+
+<script>
+function copyKey(){
+  navigator.clipboard.writeText(document.getElementById('bpkey').textContent).then(()=>{
+    const b=document.getElementById('cbtn');b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1600);
+  });
+}
+/* ---- live node status ----
+   Celestia mocha: query public RPC (CORS open), badge auto SYNCED/SYNCING/DOWN.
+   Mina & Monad: endpoints khong cho phep CORS tu trinh duyet -> trang thai tinh, update thu cong boi ops. */
+const RPC_MOCHA='https://celestia-testnet-rpc.itrocket.net/status';
+const ST={ok:['SYNCED','#4ade80'],sync:['SYNCING','#fbbf24'],down:['DOWN','#f87171'],plan:['PLANNED','#8fa6c4']};
+function setSt(id,state){const t=document.getElementById(id);if(!t)return;t.textContent=ST[state][0];t.setAttribute('fill',ST[state][1]);}
+async function refreshStatus(){
+  try{
+    const r=await fetch(RPC_MOCHA,{cache:'no-store'});if(!r.ok)throw 0;
+    const d=(await r.json()).result.sync_info;
+    const lag=(Date.now()-Date.parse(d.latest_block_time))/1000;
+    setSt('st-celestia', lag<180?'ok':'sync');
+  }catch(e){setSt('st-celestia','down');}
+}
+refreshStatus();
+setInterval(refreshStatus,120000);
+refreshStatus();
+setInterval(refreshStatus,120000);
+</script>
+</body>
+</html>
