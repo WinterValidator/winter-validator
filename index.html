@@ -133,6 +133,7 @@ footer a{margin:0 8px}
       <div class="card"><div class="big">4</div><h3>Redundant BP nodes</h3><p>Independent hosts &amp; networks, one key — a downed node never stops production.</p></div>
       <div class="card"><div class="big">24/7</div><h3>Monitoring &amp; alerting</h3><p>Prometheus + Grafana, automated alerts. We know before you do.</p></div>
       <div class="card"><div class="big">0</div><h3>Slashing incidents</h3><p>Clean record. Security-first key management, careful upgrade discipline.</p></div>
+      <div class="card"><div class="big" id="mina-uptime">—</div><h3>Mina uptime score</h3><p><span id="mina-uptime-rank">Mina Foundation leaderboard</span> · <a href="https://uptime.minaprotocol.com/" target="_blank" rel="noopener">view ↗</a></p></div>
     </div>
   </div>
 </section>
@@ -316,8 +317,17 @@ async function refreshStatus(){
 }
 refreshStatus();
 setInterval(refreshStatus,120000);
-refreshStatus();
-setInterval(refreshStatus,120000);
+/* ---- Mina Foundation uptime leaderboard (same-origin uptime.json, refreshed by ops cron) ---- */
+async function refreshUptime(){
+  try{
+    const r=await fetch('uptime.json',{cache:'no-store'});if(!r.ok)throw 0;
+    const d=await r.json();
+    const u=document.getElementById('mina-uptime'),k=document.getElementById('mina-uptime-rank');
+    if(u&&d.score_percent!=null)u.textContent=d.score_percent+'%';
+    if(k&&d.rank!=null)k.textContent='Rank #'+d.rank+' of '+d.total+' block producers';
+  }catch(e){/* keep placeholder */}
+}
+refreshUptime();
 </script>
 </body>
 </html>
