@@ -40,6 +40,11 @@ h2 .n{color:var(--ice);font-family:ui-monospace,monospace;font-size:1rem;margin-
 .keybox code{font-family:ui-monospace,Menlo,monospace;font-size:.85rem;color:var(--ice2);word-break:break-all;flex:1}
 button{background:var(--ice);border:none;border-radius:8px;padding:9px 16px;font-weight:600;color:#04121f;cursor:pointer;font-size:.9rem}
 button:hover{background:var(--ice2)}
+.actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:14px;align-items:center}
+.actions a,.actions button{display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.actions .secondary{background:transparent;border:1px solid var(--ice);color:var(--ice)}
+.actions .secondary:hover{background:rgba(109,185,255,.12);color:var(--ice2);text-decoration:none}
+.valoper{display:block;margin-top:12px;padding:9px 10px;background:var(--card2);border:1px solid var(--line);border-radius:8px;color:var(--ice2);font-family:ui-monospace,Menlo,monospace;font-size:.72rem;line-height:1.45;word-break:break-all}
 .steps{counter-reset:s;list-style:none}
 .steps li{counter-increment:s;position:relative;padding:0 0 18px 46px}
 .steps li:before{content:counter(s);position:absolute;left:0;top:0;width:30px;height:30px;border-radius:50%;background:var(--card2);border:1px solid var(--line);color:var(--ice);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem}
@@ -150,9 +155,41 @@ footer a{margin:0 8px}
   </div>
 </section>
 
+<section id="celestia-staking">
+  <div class="wrap">
+    <h2><span class="n">02</span>Delegate TIA on Celestia</h2>
+    <p style="color:var(--dim);margin-bottom:20px">Stake directly from your own wallet. Your TIA remains non-custodial; please verify the validator address before confirming.</p>
+    <div class="netgrid">
+      <div class="net">
+        <span class="glyph">⛰</span><span class="pill live">● Mainnet</span>
+        <h3>Winter Validator — Celestia</h3>
+        <div class="role">20% commission · bonded validator</div>
+        <p>Connect Keplr, then delegate TIA to Winter Validator. Keplr opens the Celestia staking dashboard; use the validator address below to find and verify us.</p>
+        <code class="valoper">celestiavaloper1kdmt8y05xkmqafxjez9qlfljetcatxhse7nh79</code>
+        <div class="actions">
+          <a href="https://wallet.keplr.app/chains/celestia" target="_blank" rel="noopener">Delegate with Keplr ↗</a>
+          <a class="secondary" href="https://www.mintscan.io/celestia/validators/celestiavaloper1kdmt8y05xkmqafxjez9qlfljetcatxhse7nh79" target="_blank" rel="noopener">Delegate via Mintscan ↗</a>
+          <button class="secondary" type="button" onclick="copyText('celestiavaloper1kdmt8y05xkmqafxjez9qlfljetcatxhse7nh79',this)">Copy address</button>
+        </div>
+      </div>
+      <div class="net">
+        <span class="glyph">🧊</span><span class="pill live">● Mocha testnet</span>
+        <h3>Winter Validator — Mocha</h3>
+        <div class="role">Testnet validator · test TIA only</div>
+        <p>For Mocha testnet delegations, open our validator profile in Mintscan. Never send mainnet TIA to a testnet address.</p>
+        <code class="valoper">celestiavaloper1s8zqq57a9gqgxfj5huqqvmp8674837dzhw3620</code>
+        <div class="actions">
+          <a href="https://www.mintscan.io/celestia-testnet/validators/celestiavaloper1s8zqq57a9gqgxfj5huqqvmp8674837dzhw3620" target="_blank" rel="noopener">Open Mocha in Mintscan ↗</a>
+          <button class="secondary" type="button" onclick="copyText('celestiavaloper1s8zqq57a9gqgxfj5huqqvmp8674837dzhw3620',this)">Copy address</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="networks">
   <div class="wrap">
-    <h2><span class="n">02</span>Where we operate</h2>
+    <h2><span class="n">03</span>Where we operate</h2>
     <p style="color:var(--dim);margin-bottom:20px">One operator, one standard: redundant hardware, aggressive monitoring, honest status. Mina is home — the winter is expanding.</p>
     <div class="netgrid">
       <div class="net"><span class="glyph">❄</span><span class="pill live">● Live</span><h3>Mina — Mainnet</h3><div class="role">Block Producer</div><p>4 redundant block producer nodes across separate hosts and networks, plus a devnet test node for rehearsing every upgrade before mainnet.</p></div>
@@ -165,7 +202,7 @@ footer a{margin:0 8px}
 
 <section id="infra">
   <div class="wrap">
-    <h2><span class="n">03</span>Infrastructure</h2>
+    <h2><span class="n">04</span>Infrastructure</h2>
     <ul class="plain">
       <li><b>4 block producer nodes</b> — distributed across separate hosts &amp; networks, identical state, synchronized</li>
       <li><b>No SNARK workers on BP nodes</b> — block production never competes for CPU with SNARK proving</li>
@@ -237,7 +274,7 @@ footer a{margin:0 8px}
 
 <section id="about">
   <div class="wrap">
-    <h2><span class="n">04</span>About Winter</h2>
+    <h2><span class="n">05</span>About Winter</h2>
     <p style="color:var(--dim)">Winter Validator is a small independent operator that started securing Mina in 2021 and never stopped. We're sysadmins and builders first: we own the hardware, write the alerting, and carry the pager ourselves. No staking-as-a-service middlemen, no rented reputation — just people who genuinely enjoy keeping nodes alive.</p>
     <p style="color:var(--dim);margin-top:12px">Our name is our operating philosophy: <b style="color:var(--ink)">cold when debugging, hot when systems break.</b> Calm, methodical incident response — and fast, honest communication when something needs your attention.</p>
     <div class="grid" style="margin-top:20px">
@@ -265,6 +302,11 @@ footer a{margin:0 8px}
 function copyKey(){
   navigator.clipboard.writeText(document.getElementById('bpkey').textContent).then(()=>{
     const b=document.getElementById('cbtn');b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1600);
+  });
+}
+function copyText(text,button){
+  navigator.clipboard.writeText(text).then(()=>{
+    const label=button.textContent;button.textContent='Copied ✓';setTimeout(()=>button.textContent=label,1600);
   });
 }
 /* ---- live node status ----
