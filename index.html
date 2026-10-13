@@ -11,8 +11,15 @@
 <meta property="og:url" content="https://validators.win/">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@wintvalidator">
+<link rel="canonical" href="https://validators.win/">
+<link rel="alternate" hreflang="en" href="https://validators.win/">
+<link rel="alternate" hreflang="ru" href="https://validators.win/ru/">
+<link rel="alternate" hreflang="zh" href="https://validators.win/zh/">
+<link rel="alternate" hreflang="ko" href="https://validators.win/ko/">
+<link rel="alternate" hreflang="vi" href="https://validators.win/vi/">
+<link rel="alternate" hreflang="x-default" href="https://validators.win/">
 <script data-goatcounter="https://wintvalidator.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
-<link rel="icon" type="image/png" href="assets/favicon.png">
+<link rel="icon" type="image/png" href="/assets/favicon.png">
 <style>
 :root{--bg:#070d1a;--card:#0d1626;--card2:#111d33;--ink:#e8f0fb;--dim:#8fa6c4;--ice:#6db9ff;--ice2:#a8d8ff;--line:#1c2c47;--good:#4ade80;--warn:#fbbf24}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -66,14 +73,22 @@ ul.plain b{color:var(--ink)}
 .net p{color:var(--dim);font-size:.92rem}
 .net .glyph{position:absolute;right:-12px;top:-14px;font-size:5rem;opacity:.08;user-select:none}
 .diagram{display:block;width:100%;margin-top:8px}
+.langs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin:0 0 22px}
+.langs a{font-size:.78rem;font-weight:600;color:var(--dim);border:1px solid var(--line);border-radius:999px;padding:3px 12px;letter-spacing:.03em}
+.langs a:hover{color:var(--ice2);border-color:var(--ice);text-decoration:none}
+.langs a.on{color:var(--ice);border-color:var(--ice);background:rgba(109,185,255,.08)}
 footer{padding:36px 0;color:var(--dim);font-size:.85rem;text-align:center}
 footer a{margin:0 8px}
 </style>
+<script type="application/json" id="i18n">{"rank":"Rank #{r} of {t} block producers","st":{"ok":"SYNCED","sync":"SYNCING","down":"DOWN","plan":"PLANNED"},"copied":"Copied ✓"}</script>
 </head>
 <body>
 <header>
   <div class="wrap">
-    <img class="logo" src="assets/logo.png" alt="Winter Validator logo" width="104" height="104">
+    <nav class="langs" aria-label="Language">
+      <a class="on" lang="en" href="/">EN</a><a lang="ru" href="/ru/">RU</a><a lang="zh" href="/zh/">中文</a><a lang="ko" href="/ko/">한국어</a><a lang="vi" href="/vi/">Tiếng Việt</a>
+    </nav>
+    <img class="logo" src="/assets/logo.png" alt="Winter Validator logo" width="104" height="104">
     <div class="tagline">Winter Validator</div>
     <p class="kicker">❄ Winter never sleeps.</p>
 <h1>Cold-headed operations.<br>Hot on uptime.</h1>
@@ -291,21 +306,22 @@ footer a{margin:0 8px}
 </footer>
 
 <script>
+const I18N=JSON.parse(document.getElementById('i18n').textContent);
+function flash(btn){
+  const orig=btn.textContent;btn.textContent=I18N.copied;
+  setTimeout(()=>btn.textContent=orig,1600);
+}
 function copyKey(){
-  navigator.clipboard.writeText(document.getElementById('bpkey').textContent).then(()=>{
-    const b=document.getElementById('cbtn');b.textContent='Copied ✓';setTimeout(()=>b.textContent='Copy',1600);
-  });
+  navigator.clipboard.writeText(document.getElementById('bpkey').textContent).then(()=>flash(document.getElementById('cbtn')));
 }
 function copyText(text,button){
-  navigator.clipboard.writeText(text).then(()=>{
-    const label=button.textContent;button.textContent='Copied ✓';setTimeout(()=>button.textContent=label,1600);
-  });
+  navigator.clipboard.writeText(text).then(()=>flash(button));
 }
 /* ---- live node status ----
    Celestia mocha: query public RPC (CORS open), badge auto SYNCED/SYNCING/DOWN.
    Mina & Monad: endpoints khong cho phep CORS tu trinh duyet -> trang thai tinh, update thu cong boi ops. */
 const RPC_MOCHA='https://celestia-testnet-rpc.itrocket.net/status';
-const ST={ok:['SYNCED','#4ade80'],sync:['SYNCING','#fbbf24'],down:['DOWN','#f87171'],plan:['PLANNED','#8fa6c4']};
+const ST={ok:[I18N.st.ok,'#4ade80'],sync:[I18N.st.sync,'#fbbf24'],down:[I18N.st.down,'#f87171'],plan:[I18N.st.plan,'#8fa6c4']};
 function setSt(id,state){const t=document.getElementById(id);if(!t)return;t.textContent=ST[state][0];t.setAttribute('fill',ST[state][1]);}
 async function refreshStatus(){
   try{
@@ -320,11 +336,11 @@ setInterval(refreshStatus,120000);
 /* ---- Mina Foundation uptime leaderboard (same-origin uptime.json, refreshed by ops cron) ---- */
 async function refreshUptime(){
   try{
-    const r=await fetch('uptime.json',{cache:'no-store'});if(!r.ok)throw 0;
+    const r=await fetch('/uptime.json',{cache:'no-store'});if(!r.ok)throw 0;
     const d=await r.json();
     const u=document.getElementById('mina-uptime'),k=document.getElementById('mina-uptime-rank');
     if(u&&d.score_percent!=null)u.textContent=d.score_percent+'%';
-    if(k&&d.rank!=null)k.textContent='Rank #'+d.rank+' of '+d.total+' block producers';
+    if(k&&d.rank!=null)k.textContent=I18N.rank.replace('{r}',d.rank).replace('{t}',d.total);
   }catch(e){/* keep placeholder */}
 }
 refreshUptime();
